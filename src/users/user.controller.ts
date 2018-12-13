@@ -1,27 +1,36 @@
-import { Get, Post, Body, Controller } from '@nestjs/common'
+import { Get, Query, Controller } from '@nestjs/common'
 import { UserService } from './user.service'
 
-import { SignUp } from './dto/user.dto'
+import { SignUp, SignIn } from './dto/user.dto'
 
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post('create')
-  create(@Body() signUp: SignUp): any {
-    console.log(signUp)
+  @Get('signup')
+  signup(@Query() signUp: SignUp): any {
     try {
       return this.userService.register(signUp)
     } catch {
-      return false
+      return { code: 404, message: 'An error occurred'}
     }
   }
 
-  // @Post('login')
-  // login()
+  @Get('signin')
+  signin(@Query() signIn: SignIn): any {
+    try {
+      return this.userService.login(signIn)
+    } catch {
+      return { code: 404, message: 'An error occurred'}
+    }
+  }
 
-  @Get('ab*cd')
-  findAll() {
-    return 'This route uses a wildcard'
+  @Get('list')
+  list(): any {
+    try {
+      return this.userService.users()
+    } catch {
+      return { code: 404, message: 'An error occurred'}
+    }
   }
 }

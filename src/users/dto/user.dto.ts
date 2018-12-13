@@ -1,7 +1,7 @@
 export class SignUp {
   readonly username: string
   password: string
-  readonly confirmPassword: string
+  readonly cPassword: string
   readonly fullname: string
 }
 

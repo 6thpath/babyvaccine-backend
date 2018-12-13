@@ -10,20 +10,20 @@ export class UserService {
   constructor(@Inject('UserModelToken') private readonly userModel: Model<User>) {}
 
   async register(signUp: SignUp): Promise<User|string>{
-    signUp.password = SHA256(signUp.password).toString()
+    // signUp.password = SHA256(signUp.password).toString()
     const newAccount = new this.userModel(signUp)
     return await newAccount.save()
   }
 
-  async login(signIn: SignIn): Promise<UserInfo|string>{
-    const user = await this.userModel.find(signIn)
+  async login(signIn: SignIn): Promise<UserInfo|any>{
+    const user = await this.userModel.findOne(signIn)
     if (!user) {
-      return 'Wrong username or password'
+      return { code: 400, message: 'Wrong username or password'}
     }
     return user
   }
 
-  root(): string {
-    return 'Hello World!'
+  async users(): Promise<[User]>{
+    return await this.userModel.find()
   }
 }
