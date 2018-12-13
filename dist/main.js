@@ -8,6 +8,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const env = require("dotenv");
+env.config();
 const core_1 = require("@nestjs/core");
 const app_module_1 = require("./app.module");
 function bootstrap() {
