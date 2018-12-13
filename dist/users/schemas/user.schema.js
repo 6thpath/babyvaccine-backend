@@ -4,7 +4,10 @@ const mongoose = require("mongoose");
 exports.UserSchema = new mongoose.Schema({
     username: String,
     password: String,
-    role: Number,
+    role: {
+        type: Number,
+        default: 1
+    },
     fullname: String
 });
 //# sourceMappingURL=user.schema.js.map

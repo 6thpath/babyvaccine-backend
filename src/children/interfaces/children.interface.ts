@@ -1,7 +1,7 @@
 export class Children {
-  readonly id: string
+  readonly _id: string
   readonly name: string
-  readonly dateOfBirth: string
+  readonly dob: string
   readonly userId: string
   readonly isEnabled: boolean
 }

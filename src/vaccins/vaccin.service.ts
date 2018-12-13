@@ -17,9 +17,9 @@ export class VaccinService {
   }
 
   async create(data: Create): Promise<any>{
-    const newAccount = new this.vaccinModel(data)
+    const newVaccin = new this.vaccinModel(data)
     try {
-      await newAccount.save()
+      await newVaccin.save()
       return { code: 200, message: 'Vaccin created' }
     } catch {
       return { code: 404, message: 'An error occurred!' }
@@ -28,7 +28,7 @@ export class VaccinService {
 
   async update(data: Update): Promise<any>{
     try {
-      await this.vaccinModel.UpdateOne({ id: data.id }, data)
+      await this.vaccinModel.updateOne({ _id: data.id }, data)
       return { code: 200, message: 'Vaccin updated' }
     } catch {
       return { code: 404, message: 'An error occurred!' }
@@ -37,8 +37,8 @@ export class VaccinService {
 
   async delete(data: Delete): Promise<any>{
     try {
-      await this.vaccinModel.UpdateOne({ id: data.id }, { isEnabled: false })
-      return { code: 200, message: 'Vaccin updated' }
+      await this.vaccinModel.updateOne({ _id: data.id }, { isEnabled: false })
+      return { code: 200, message: 'Vaccin deleted' }
     } catch {
       return { code: 404, message: 'An error occurred!' }
     }

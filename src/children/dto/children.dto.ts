@@ -1,6 +1,6 @@
 export class Create {
   readonly name: string
-  readonly dateOfBirth: string
+  readonly dob: string
   readonly userId: string
 }
 

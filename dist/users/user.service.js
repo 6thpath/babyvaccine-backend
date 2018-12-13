@@ -29,6 +29,10 @@ let UserService = class UserService {
     }
     register(signUp) {
         return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.userModel.countDocuments({ username: signUp.username });
+            if (response) {
+                return { code: 400, message: 'Username already existed!' };
+            }
             const newAccount = new this.userModel(signUp);
             return yield newAccount.save();
         });

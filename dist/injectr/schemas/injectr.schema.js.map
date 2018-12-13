@@ -1,0 +1,1 @@
+{"version":3,"file":"injectr.schema.js","sourceRoot":"","sources":["../../../src/injectr/schemas/injectr.schema.ts"],"names":[],"mappings":";;AAAA,qCAAoC;AAEvB,QAAA,aAAa,GAAG,IAAI,QAAQ,CAAC,MAAM,CAAC;IAC/C,UAAU,EAAE,MAAM;IAClB,QAAQ,EAAE,MAAM;IAChB,QAAQ,EAAE,MAAM;IAChB,SAAS,EAAE;QACT,IAAI,EAAE,OAAO;QACb,OAAO,EAAE,IAAI;KACd;CACF,CAAC,CAAA"}

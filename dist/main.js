@@ -15,7 +15,7 @@ const app_module_1 = require("./app.module");
 function bootstrap() {
     return __awaiter(this, void 0, void 0, function* () {
         const app = yield core_1.NestFactory.create(app_module_1.AppModule, new core_1.FastifyAdapter());
-        yield app.listen(process.env.PORT || 3000);
+        yield app.listen(process.env.PORT || 3000, '0.0.0.0');
     });
 }
 bootstrap();

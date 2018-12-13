@@ -28,7 +28,7 @@ export class ChildrenService {
 
   async update(data: Update): Promise<any>{
     try {
-      await this.childrenModel.UpdateOne({ id: data.id }, data)
+      await this.childrenModel.updateOne({ _id: data.id }, data)
       return { code: 200, message: 'Children updated' }
     } catch {
       return { code: 404, message: 'An error occurred!' }
@@ -37,7 +37,7 @@ export class ChildrenService {
 
   async delete(data: Delete): Promise<any>{
     try {
-      await this.childrenModel.UpdateOne({ id: data.id }, { isEnabled: false })
+      await this.childrenModel.updateOne({ _id: data.id }, { isEnabled: false })
       return { code: 200, message: 'Children deleted' }
     } catch {
       return { code: 404, message: 'An error occurred!' }

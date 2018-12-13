@@ -5,7 +5,7 @@ exports.userProvider = [
     {
         provide: 'UserModelToken',
         useFactory: (connection) => connection.model('User', user_schema_1.UserSchema),
-        inject: ['DbConnectionToken'],
-    },
+        inject: ['DbConnectionToken']
+    }
 ];
 //# sourceMappingURL=user.provider.js.map
