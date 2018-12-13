@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common'
 import { Model } from 'mongoose'
-import * as SHA256 from 'crypto-js/sha256'
+// import * as SHA256 from 'crypto-js/sha256'
 
 import { User } from './interfaces/user.interface'
 import { SignUp, SignIn, UserInfo } from './dto/user.dto'
@@ -9,7 +9,11 @@ import { SignUp, SignIn, UserInfo } from './dto/user.dto'
 export class UserService {
   constructor(@Inject('UserModelToken') private readonly userModel: Model<User>) {}
 
-  async register(signUp: SignUp): Promise<User|string>{
+  async register(signUp: SignUp): Promise<User|any>{
+    const response = await this.userModel.countDocuments({ username: signUp.username })
+    if (response) {
+      return { code: 400, message: 'Username already existed!'}
+    }
     // signUp.password = SHA256(signUp.password).toString()
     const newAccount = new this.userModel(signUp)
     return await newAccount.save()
