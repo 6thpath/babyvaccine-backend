@@ -1,16 +1,26 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, Inject } from '@nestjs/common'
 import { Model } from 'mongoose'
-import { InjectModel } from '@nestjs/mongoose'
+import * as SHA256 from 'crypto-js/sha256'
+
 import { User } from './interfaces/user.interface'
-import { SignUp } from './dto/signUp.dto'
+import { SignUp, SignIn, UserInfo } from './dto/user.dto'
 
 @Injectable()
 export class UserService {
-  constructor(@InjectModel('User') private readonly userModel: Model<User>) {}
+  constructor(@Inject('UserModelToken') private readonly userModel: Model<User>) {}
 
-  async register(signUp: SignUp): Promise<User>{
-    const registerAccount = new this.userModel(signUp)
-    return await registerAccount.save()
+  async register(signUp: SignUp): Promise<User|string>{
+    signUp.password = SHA256(signUp.password).toString()
+    const newAccount = new this.userModel(signUp)
+    return await newAccount.save()
+  }
+
+  async login(signIn: SignIn): Promise<UserInfo|string>{
+    const user = await this.userModel.find(signIn)
+    if (!user) {
+      return 'Wrong username or password'
+    }
+    return user
   }
 
   root(): string {
