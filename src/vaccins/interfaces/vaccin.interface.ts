@@ -3,4 +3,5 @@ export class Vaccin {
   readonly name: string
   readonly description: string
   readonly availableAge: number
+  readonly isEnabled: boolean
 }

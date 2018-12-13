@@ -3,10 +3,12 @@ import { AppController } from './app.controller'
 import { AppService } from './app.service'
 
 import { UserModule } from './users/user.module'
+import { VaccinModule } from './vaccins/vaccin.module'
 
 @Module({
   imports: [
-    UserModule
+    UserModule,
+    VaccinModule
   ],
   controllers: [AppController],
   providers: [AppService]

@@ -5,6 +5,6 @@ export const userProvider = [
   {
     provide: 'UserModelToken',
     useFactory: (connection: Connection) => connection.model('User', UserSchema),
-    inject: ['DbConnectionToken'],
-  },
-];
+    inject: ['DbConnectionToken']
+  }
+]

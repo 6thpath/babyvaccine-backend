@@ -5,7 +5,8 @@ export class AppService {
   root(): string {
     return `
       Hello World!
-      abcs
+      User:
+      /users/
       `
   }
 }

@@ -1,36 +1,29 @@
-// import { Get, Query, Controller } from '@nestjs/common'
-// import { UserService } from './vaccin.service'
+import { Get, Query, Controller } from '@nestjs/common'
+import { VaccinService } from './vaccin.service'
 
-// import { SignUp, SignIn } from './dto/user.dto'
+import { Create, Update, Delete } from './dto/vaccin.dto'
 
-// @Controller('users')
-// export class UserController {
-//   constructor(private readonly userService: UserService) {}
+@Controller('vaccin')
+export class VaccinController {
+  constructor(private readonly vaccinService: VaccinService) {}
 
-//   @Get('signup')
-//   signup(@Query() signUp: SignUp): any {
-//     try {
-//       return this.userService.register(signUp)
-//     } catch {
-//       return { code: 404, message: 'An error occurred'}
-//     }
-//   }
+  @Get('list')
+  list(): any {
+    return this.vaccinService.vaccins()
+  }
 
-//   @Get('signin')
-//   signin(@Query() signIn: SignIn): any {
-//     try {
-//       return this.userService.login(signIn)
-//     } catch {
-//       return { code: 404, message: 'An error occurred'}
-//     }
-//   }
+  @Get('create')
+  create(@Query() data: Create): any {
+    return this.vaccinService.create(data)
+  }
 
-//   @Get('list')
-//   list(): any {
-//     try {
-//       return this.userService.users()
-//     } catch {
-//       return { code: 404, message: 'An error occurred'}
-//     }
-//   }
-// }
+  @Get('update')
+  update(@Query() data: Update): any {
+    return this.vaccinService.update(data)
+  }
+
+  @Get('delete')
+  delete(@Query() data: Delete): any {
+    return this.vaccinService.delete(data)
+  }
+}
