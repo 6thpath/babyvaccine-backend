@@ -20,28 +20,13 @@ let UserController = class UserController {
         this.userService = userService;
     }
     signup(signUp) {
-        try {
-            return this.userService.register(signUp);
-        }
-        catch (_a) {
-            return { code: 404, message: 'An error occurred' };
-        }
+        return this.userService.register(signUp);
     }
     signin(signIn) {
-        try {
-            return this.userService.login(signIn);
-        }
-        catch (_a) {
-            return { code: 404, message: 'An error occurred' };
-        }
+        return this.userService.login(signIn);
     }
     list() {
-        try {
-            return this.userService.users();
-        }
-        catch (_a) {
-            return { code: 404, message: 'An error occurred' };
-        }
+        return this.userService.users();
     }
 };
 __decorate([

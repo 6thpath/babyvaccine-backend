@@ -1,7 +1,7 @@
 export declare class SignUp {
     readonly username: string;
     password: string;
-    readonly cPassword: string;
+    readonly cpassword: string;
     readonly fullname: string;
 }
 export declare class SignIn {

@@ -29,26 +29,46 @@ let UserService = class UserService {
     }
     register(signUp) {
         return __awaiter(this, void 0, void 0, function* () {
-            const response = yield this.userModel.countDocuments({ username: signUp.username });
-            if (response) {
-                return { code: 400, message: 'Username already existed!' };
+            try {
+                const response = yield this.userModel.countDocuments({ username: signUp.username });
+                if (response) {
+                    return { code: 400, message: 'Username already existed!' };
+                }
+                if (signUp.password !== signUp.cpassword) {
+                    return { code: 400, message: 'Password and confirm password does not match' };
+                }
+                const newAccount = new this.userModel(signUp);
+                yield newAccount.save();
+                return { code: 200, message: 'Registered successfully' };
             }
-            const newAccount = new this.userModel(signUp);
-            return yield newAccount.save();
+            catch (_a) {
+                return { code: 404, message: 'An error occurred!' };
+            }
         });
     }
     login(signIn) {
         return __awaiter(this, void 0, void 0, function* () {
-            const user = yield this.userModel.findOne(signIn);
-            if (!user) {
-                return { code: 400, message: 'Wrong username or password' };
+            try {
+                const user = yield this.userModel.findOne(signIn);
+                if (!user) {
+                    return { code: 400, message: 'Wrong username or password' };
+                }
+                user.password = '*';
+                return user;
             }
-            return user;
+            catch (_a) {
+                return { code: 404, message: 'An error occurred!' };
+            }
         });
     }
     users() {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.userModel.find();
+            try {
+                return yield this.userModel.find();
+            }
+            catch (_a) {
+                return { code: 404, message: 'An error occurred!' };
+            }
         });
     }
 };

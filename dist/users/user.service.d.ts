@@ -6,5 +6,5 @@ export declare class UserService {
     constructor(userModel: Model<User>);
     register(signUp: SignUp): Promise<User | any>;
     login(signIn: SignIn): Promise<UserInfo | any>;
-    users(): Promise<[User]>;
+    users(): Promise<[User] | any>;
 }

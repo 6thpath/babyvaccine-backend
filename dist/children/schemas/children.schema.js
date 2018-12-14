@@ -2,9 +2,18 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose = require("mongoose");
 exports.ChildrenSchema = new mongoose.Schema({
-    name: String,
-    dob: String,
-    userId: String,
+    name: {
+        type: String,
+        required: true
+    },
+    dob: {
+        type: String,
+        required: true
+    },
+    userId: {
+        type: String,
+        required: true
+    },
     isEnabled: {
         type: Boolean,
         default: true
