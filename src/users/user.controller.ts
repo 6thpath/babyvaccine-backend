@@ -9,28 +9,16 @@ export class UserController {
 
   @Get('signup')
   signup(@Query() signUp: SignUp): any {
-    try {
-      return this.userService.register(signUp)
-    } catch {
-      return { code: 404, message: 'An error occurred'}
-    }
+    return this.userService.register(signUp)
   }
 
   @Get('signin')
   signin(@Query() signIn: SignIn): any {
-    try {
-      return this.userService.login(signIn)
-    } catch {
-      return { code: 404, message: 'An error occurred'}
-    }
+    return this.userService.login(signIn)
   }
 
   @Get('list')
   list(): any {
-    try {
-      return this.userService.users()
-    } catch {
-      return { code: 404, message: 'An error occurred'}
-    }
+    return this.userService.users()
   }
 }

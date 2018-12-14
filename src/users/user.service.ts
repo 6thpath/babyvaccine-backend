@@ -10,24 +10,41 @@ export class UserService {
   constructor(@Inject('UserModelToken') private readonly userModel: Model<User>) {}
 
   async register(signUp: SignUp): Promise<User|any>{
-    const response = await this.userModel.countDocuments({ username: signUp.username })
-    if (response) {
-      return { code: 400, message: 'Username already existed!'}
+    try {
+      const response = await this.userModel.countDocuments({ username: signUp.username })
+      if (response) {
+        return { code: 400, message: 'Username already existed!'}
+      }
+      // signUp.password = SHA256(signUp.password).toString()
+      if (signUp.password !== signUp.cpassword) {
+        return { code: 400, message: 'Password and confirm password does not match' }
+      }
+      const newAccount = new this.userModel(signUp)
+      await newAccount.save()
+      return { code: 200, message: 'Registered successfully' }
+    } catch {
+      return { code: 404, message: 'An error occurred!' }
     }
-    // signUp.password = SHA256(signUp.password).toString()
-    const newAccount = new this.userModel(signUp)
-    return await newAccount.save()
   }
 
   async login(signIn: SignIn): Promise<UserInfo|any>{
-    const user = await this.userModel.findOne(signIn)
-    if (!user) {
-      return { code: 400, message: 'Wrong username or password'}
+    try {
+      const user = await this.userModel.findOne(signIn)
+      if (!user) {
+        return { code: 400, message: 'Wrong username or password' }
+      }
+      user.password = '*'
+      return user
+    } catch {
+      return { code: 404, message: 'An error occurred!' }
     }
-    return user
   }
 
-  async users(): Promise<[User]>{
-    return await this.userModel.find()
+  async users(): Promise<[User]|any>{
+    try {
+      return await this.userModel.find()
+    } catch {
+      return { code: 404, message: 'An error occurred!' }
+    }
   }
 }

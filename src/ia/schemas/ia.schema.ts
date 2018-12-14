@@ -1,8 +1,14 @@
 import * as mongoose from 'mongoose'
 
 export const IaSchema = new mongoose.Schema({
-  name: String,
-  address: String,
+  name: {
+    type: String,
+    required: true
+  },
+  address: {
+    type: String,
+    required: true
+  },
   isEnabled: {
     type: Boolean,
     default: true
